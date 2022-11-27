@@ -28,3 +28,5 @@ RUN set -x \
 
 RUN set -x \
   && curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b /usr/local/go/bin v1.50.1
+
+# https://stackoverflow.com/questions/65538591/run-protoc-command-into-docker-container
