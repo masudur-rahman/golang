@@ -8,7 +8,8 @@ SRC_REG    ?=
 
 DOCKER_PLATFORMS := darwin/arm64 linux/amd64 linux/arm64 windows/amd64
 PLATFORM         ?= $(firstword $(DOCKER_PLATFORMS))
-TAG              = $(VERSION)_$(subst /,_,$(PLATFORM))
+# TAG              = $(VERSION)_$(subst /,_,$(PLATFORM))
+TAG              = $(VERSION)
 
 container-%:
 	@$(MAKE) container \
