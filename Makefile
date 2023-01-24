@@ -8,8 +8,8 @@ SRC_REG    ?=
 
 DOCKER_PLATFORMS := darwin/arm64 linux/amd64 linux/arm64 windows/amd64
 PLATFORM         ?= $(firstword $(DOCKER_PLATFORMS))
-# TAG              = $(VERSION)_$(subst /,_,$(PLATFORM))
-TAG              = $(VERSION)
+TAG              = $(VERSION)_$(subst /,_,$(PLATFORM))
+#TAG              = $(VERSION)
 
 container-%:
 	@$(MAKE) container \
@@ -29,8 +29,8 @@ all-push: $(addprefix push-, $(subst /,_,$(DOCKER_PLATFORMS)))
 ifeq (,$(SRC_REG))
 container:
 	@echo "container: $(IMAGE):$(TAG)"
-	# docker buildx build --platform $(PLATFORM) --load --pull -t $(IMAGE):$(TAG) -f Dockerfile .
-	docker buildx build --load --pull -t $(IMAGE):$(TAG) -f Dockerfile .
+	docker buildx build --platform $(PLATFORM) --load --pull -t $(IMAGE):$(TAG) -f Dockerfile .
+	#docker buildx build --load --pull -t $(IMAGE):$(TAG) -f Dockerfile .
 	@echo
 else
 container:
