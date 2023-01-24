@@ -33,7 +33,7 @@ jobs:
           USERNAME: masudur-rahman
         run: |
           docker login ghcr.io --username ${USERNAME} --password ${DOCKER_TOKEN}
-          make push
+          make release
 
       - name: Publish Docker image to Docker Container Registry
         env:
