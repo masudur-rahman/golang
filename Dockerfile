@@ -1,4 +1,4 @@
-FROM golang:1.19.3
+FROM golang:1.19.3-alpine
 
 LABEL org.opencontainers.image.source "https://github.com/masudur-rahman/golang"
 LABEL org.opencontainers.image.description "Custom Golang docker image for improved Go experience..!"
