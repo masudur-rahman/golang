@@ -43,4 +43,4 @@ jobs:
           USERNAME: masudjuly02
         run: |
           docker login --username ${USERNAME} --password ${DOCKER_TOKEN}
-          make push
+          make release
