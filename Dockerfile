@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 golang:1.19.3
+FROM golang:1.19.3
 
 LABEL org.opencontainers.image.source "https://github.com/masudur-rahman/golang"
 LABEL org.opencontainers.image.description "Custom Golang docker image for improved Go experience..!"
@@ -31,8 +31,7 @@ RUN set -x \
     && go install github.com/incu6us/goimports-reviser/v3@latest \
     && go install golang.org/x/lint/golint@latest \
     && go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.28.1 \
-    && go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2.0 \
-    && rm -rf $GOPATH/src/* && rm -rf $GOPATH/pkg/*
+    && go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2.0
 
 RUN set -x \
     && curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b /usr/local/go/bin v1.50.1

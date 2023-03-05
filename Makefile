@@ -6,10 +6,11 @@ IMAGE      := $(REGISTRY)/$(BIN)
 VERSION    ?= 1.19.3
 SRC_REG    ?=
 
-DOCKER_PLATFORMS := darwin/arm64 linux/amd64 linux/arm64 windows/amd64
+DOCKER_PLATFORMS := linux/arm64 linux/amd64 #windows/amd64
 PLATFORM         ?= $(firstword $(DOCKER_PLATFORMS))
 TAG              = $(VERSION)_$(subst /,_,$(PLATFORM))
 #TAG              = $(VERSION)
+BUILDX_PLATFORMS := linux/arm64,linux/amd64
 
 container-%:
 	@$(MAKE) container \
@@ -48,6 +49,9 @@ push: container
 VER_MAJOR := $(shell echo $(VERSION) | cut -f1 -d.)
 VER_MINOR := $(shell echo $(VERSION) | cut -f2 -d.)
 Mm        := $(VER_MAJOR).$(VER_MINOR)
+
+buildx:
+	docker buildx build --platform $(BUILDX_PLATFORMS) --load --pull -t $(IMAGE):$(Mm) -f Dockerfile .
 
 .PHONY: docker-manifest
 docker-manifest:
