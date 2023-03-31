@@ -31,7 +31,6 @@ ifeq (,$(SRC_REG))
 container:
 	@echo "container: $(IMAGE):$(TAG)"
 	docker buildx build --platform $(PLATFORM) --load --pull -t $(IMAGE):$(TAG) -f Dockerfile .
-	#docker buildx build --load --pull -t $(IMAGE):$(TAG) -f Dockerfile .
 	@echo
 else
 container:

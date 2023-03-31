@@ -1,7 +1,11 @@
 FROM golang:1.20.1
 
-LABEL org.opencontainers.image.source "https://github.com/masudur-rahman/golang"
-LABEL org.opencontainers.image.description "Custom Golang docker image for improved Go experience..!"
+LABEL org.opencontainers.image.source = "https://github.com/masudur-rahman/golang"
+LABEL org.opencontainers.image.description = "Custom Golang docker image for improved Go experience..!"
+
+ARG TARGETOS
+ARG TARGETARCH
+ARG VERSION
 
 RUN set -x \
   && apt update \
@@ -16,7 +20,6 @@ RUN set -x \
     git               \
     gnupg             \
     mercurial         \
-    protobuf-compiler \
     socat             \
     upx               \
     wget              \
@@ -25,7 +28,6 @@ RUN set -x \
     unzip             \
     g++               \
     make              \
-    protobuf-compiler \
   && rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man /tmp/*
 
 RUN set -x \
@@ -39,12 +41,25 @@ RUN set -x \
 RUN set -x \
     && curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b /usr/local/go/bin v1.50.1
 
+
+RUN if [ "$TARGETARCH" = "arm64" ]; then \
+      echo aarch_64 > /tmp/protoc_arch; \
+    else \
+      echo x86_64 > /tmp/protoc_arch; \
+    fi
+
 RUN set -x \
-    && mkdir -p /tmp/protobuf \
-    && wget -O /tmp/protobuf/protobuf-22.2.zip https://github.com/protocolbuffers/protobuf/releases/download/v22.2/protobuf-22.2.zip \
-    && unzip /tmp/protobuf/protobuf-22.2.zip -d /tmp/protobuf/ \
-    && cp -r /tmp/protobuf/protobuf-22.2/src/google /usr/include/ \
-    && rm -rf /tmp/protobuf
+    && export PROTOC_ARCH=$(cat /tmp/protoc_arch) \
+    && mkdir -p /tmp/protoc \
+    && cd /tmp/protoc \
+    && wget https://github.com/protocolbuffers/protobuf/releases/download/v22.2/protoc-22.2-linux-$PROTOC_ARCH.zip \
+    && unzip protoc-22.2-linux-$PROTOC_ARCH.zip \
+    && cp bin/protoc /usr/local/bin/ \
+    && cp -r include/* /usr/local/include/ \
+    && cd - && rm -rf /tmp/protoc
 
-
-# https://stackoverflow.com/questions/65538591/run-protoc-command-into-docker-container
+# Just keeping it here
+# ENV TARGETARCH=$TARGETARCH
+# ADD scripts/install-protoc.sh /usr/local/bin/
+# RUN chmod +x /usr/local/bin/install-protoc.sh
+# RUN install-protoc.sh
