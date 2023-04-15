@@ -3,7 +3,7 @@ SHELL=/bin/bash -o pipefail
 REGISTRY   ?= ghcr.io/masudur-rahman
 BIN        ?= golang
 IMAGE      := $(REGISTRY)/$(BIN)
-VERSION    ?= 1.20.1
+VERSION    ?= 1.20.3
 SRC_REG    ?=
 
 DOCKER_PLATFORMS := linux/arm64 linux/amd64 #windows/amd64
