@@ -1,4 +1,4 @@
-FROM golang:1.20.3
+FROM golang:1.20.7
 
 LABEL org.opencontainers.image.source = "https://github.com/masudur-rahman/golang"
 LABEL org.opencontainers.image.description = "Custom Golang docker image for improved Go experience..!"
@@ -21,7 +21,6 @@ RUN set -x \
     gnupg             \
     mercurial         \
     socat             \
-    upx               \
     wget              \
     xz-utils          \
     zip               \
@@ -39,7 +38,7 @@ RUN set -x \
     && go install github.com/golang/mock/mockgen@latest
 
 RUN set -x \
-    && curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b /usr/local/go/bin v1.50.1
+    && curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b /usr/local/go/bin v1.54.1
 
 
 RUN if [ "$TARGETARCH" = "arm64" ]; then \
