@@ -35,7 +35,8 @@ RUN set -x \
     && go install golang.org/x/lint/golint@latest \
     && go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.30.0 \
     && go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.3.0 \
-    && go install github.com/golang/mock/mockgen@latest
+    && go install github.com/golang/mock/mockgen@latest \
+    && go install github.com/go-delve/delve/cmd/dlv@latest
 
 RUN set -x \
     && curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b /usr/local/go/bin v1.54.1
