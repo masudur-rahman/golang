@@ -27,6 +27,7 @@ RUN set -x \
     unzip             \
     g++               \
     make              \
+    clang             \
   && rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man /tmp/*
 
 RUN set -x \
