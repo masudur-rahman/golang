@@ -28,6 +28,7 @@ RUN set -x \
     g++               \
     make              \
     clang             \
+    shfmt             \
   && rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man /tmp/*
 
 RUN set -x \
