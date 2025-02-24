@@ -1,4 +1,4 @@
-FROM golang:1.23.1
+FROM golang:1.23.6
 
 LABEL org.opencontainers.image.source = "https://github.com/masudur-rahman/golang"
 LABEL org.opencontainers.image.description = "Custom Golang docker image for improved Go experience..!"
