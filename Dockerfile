@@ -33,7 +33,7 @@ RUN set -x \
 
 RUN set -x \
     && export GOPATH=/usr/local/go \
-    && go install github.com/incu6us/goimports-reviser/v3@latest \
+    && go install github.com/incu6us/goimports-reviser/v3@v3.8.2 \
     && go install golang.org/x/lint/golint@latest \
     && go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.30.0 \
     && go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.3.0 \
